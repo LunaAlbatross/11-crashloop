@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: payment
+  namespace: crashloop-lab
+
+spec:
+  selector:
+    app: payment
+
+  ports:
+  - port: 5000
+    targetPort: 5000
+
+  type: ClusterIP

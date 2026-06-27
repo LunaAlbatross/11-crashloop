@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: payment
+  namespace: crashloop-lab
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: payment
+
+  template:
+    metadata:
+      labels:
+        app: payment
+
+    spec:
+      containers:
+      - name: payment
+
+        image: payment-service:v1
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 5000
+
+        env:
+        - name: DB_HOST
+          value: postgres
+
+        - name: DB_NAME
+          value: paymentdb
+
+        - name: DB_USER
+          value: admin
+
+        - name: DB_PASSWORD
+          value: admin123
